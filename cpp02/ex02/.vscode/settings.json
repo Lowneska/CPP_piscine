@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "system_error": "cpp",
+        "typeinfo": "cpp",
+        "atomic": "cpp",
+        "iterator": "cpp",
+        "algorithm": "cpp"
+    }
+}
