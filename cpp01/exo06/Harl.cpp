@@ -1,18 +1,18 @@
 #include "Harl.hpp"
-#include <map>
 #include <string>
 #include <iostream>
-#include <utility>
 
-Harl::Harl()
-{
-    function.insert(std::pair<std::string, func>("DEBUG", &Harl::debug));
-    function.insert(std::pair<std::string, func>("INFO", &Harl::info));
-    function.insert(std::pair<std::string, func>("WARNING", &Harl::warning));
-    function.insert(std::pair<std::string, func>("ERROR", &Harl::error));
-}
+t_pair	Harl::function[] = {
+	{std::string("DEBUG"), &Harl::debug},
+	{std::string("INFO"), &Harl::info},
+	{std::string("WARNING"), &Harl::warning},
+	{std::string("ERROR"), &Harl::error},
+};
+
+Harl::Harl(){};
 
 Harl::~Harl(){};
+
 void Harl::debug(void)
 {
     std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger.\nI really do !\n" << std::endl;
@@ -32,9 +32,15 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-    if (function.find(level) == function.end()) {
-        std::cout << "Value not found !" << std::endl;
-    } else {
-        (this->*function[level])();
+    int i;
+    for(i = 0; i < 4; i++)
+    {
+        if (this->function[i].key.compare(level) == 0)
+        {
+            (this->*function[i].value)();
+            break;
+        }
     }
+    if (i == 4)
+        std::cout << "No value found !\n" << std::endl;
 }

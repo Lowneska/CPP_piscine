@@ -4,12 +4,17 @@
 #include <map>
 class Harl;
 typedef void (Harl::*func)(void);
+typedef struct s_pair
+{
+    std::string key;
+    func        value;
+} t_pair;
 
 class Harl
 {
     private :
 
-        std::map<std::string, func> function;
+        static t_pair function[];
 
         void debug(void);
         void info(void );
