@@ -9,11 +9,6 @@ typedef struct s_pair
     func        value;
 } t_pair;
 
-typedef struct s_newpair
-{
-    std::string key;
-    int        value;
-} t_newpair;
 class Harl
 {
     private :
