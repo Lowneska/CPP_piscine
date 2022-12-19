@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 18:50:15 by skhali            #+#    #+#             */
-/*   Updated: 2022/12/03 18:50:16 by skhali           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:44:49 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 void randomChump( std::string name )
 {
-    Zombie *z1 = new Zombie(name);
-    z1->announce();
+    Zombie z1(name);
+    z1.announce();
 }
