@@ -6,22 +6,22 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:13:12 by skhali            #+#    #+#             */
-/*   Updated: 2022/12/10 16:13:13 by skhali           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:45:50 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-static const uint bits_number = 8;
 Fixed::Fixed()
 {
     std::cout << "Default constructor called." << std::endl;
     this->value = 0;
 }
 
-Fixed::Fixed(const Fixed &fixed) : value(fixed.value)
+Fixed::Fixed(const Fixed &fixed) //: value(fixed.value)
 {
     std::cout << "Copy constructor called." << std::endl;
+    this->value = fixed.getRawBits();
 }
 
 Fixed::~Fixed()
@@ -32,7 +32,7 @@ Fixed::~Fixed()
 Fixed &Fixed::operator=(Fixed const &val)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    this->value = val.value;
+    this->value = val.getRawBits();
     return *this;
 }
 

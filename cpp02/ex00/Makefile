@@ -6,7 +6,7 @@
 #    By: skhali <skhali@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/10 16:13:30 by skhali            #+#    #+#              #
-#    Updated: 2022/12/11 15:30:36 by skhali           ###   ########.fr        #
+#    Updated: 2022/12/19 14:17:24 by skhali           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ CC				=	c++
 RM				=	rm -rf
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98  
 
-### Commandes
 
 all:			${NAME}
 

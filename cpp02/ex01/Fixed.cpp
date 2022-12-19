@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:13:12 by skhali            #+#    #+#             */
-/*   Updated: 2022/12/11 13:29:47 by skhali           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:01:24 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ Fixed::Fixed(const float val)
     this->value = roundf(ldexp(val, this->bits_number));
 }
 
-Fixed::Fixed(const Fixed &fixed) : value(fixed.value)
+Fixed::Fixed(const Fixed &fixed) //: value(fixed.value)
 {
     std::cout << "Copy constructor called." << std::endl;
+    this->value = fixed.getRawBits();
 }
 
 Fixed::~Fixed()
@@ -48,7 +49,7 @@ Fixed::~Fixed()
 Fixed &Fixed::operator=(Fixed const &val)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    this->value = val.value;
+    this->value = val.getRawBits();
     return *this;
 }
 
@@ -60,7 +61,7 @@ std::ostream& operator<<(std::ostream& COUT, const Fixed &fixed)
 
 int Fixed::getRawBits(void) const
 {
-    std::cout << "getRawBits member function called." << std::endl;
+    //std::cout << "getRawBits member function called." << std::endl;
     return this->value;
 }
 

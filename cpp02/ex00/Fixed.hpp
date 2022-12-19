@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:13:19 by skhali            #+#    #+#             */
-/*   Updated: 2022/12/11 15:30:09 by skhali           ###   ########.fr       */
+/*   Updated: 2022/12/19 14:18:43 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 
 #include <iostream>
 
-typedef unsigned int	uint;
 class Fixed
 {
     private :
         int value;
-        static const uint bits_number;
+        static const unsigned int bits_number = 8;
     public :
         Fixed();
         Fixed(const Fixed& fixed);
