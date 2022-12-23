@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cctype>
 #include <cstring>
+#include <string>
+#include <climits>
 
 enum e_type { INT, FLOAT, DOUBLE, CHAR, OTHER};
 
@@ -54,10 +56,25 @@ e_type getType(std::string input)
     return OTHER; 
 }
 
+void isInt(std::string input)
+{
+    long value = stol(input, NULL, 10);
+    if (value < INT_MIN || value > INT_MAX)
+        std::cout << "Overflow : conversion de type en char, int, float, double impossible." << std::endl;
+    else
+    {
+        if (value < CHAR_MIN || value > CHAR_MAX)
+            std::cout << "char: impossible" << std::endl;
+        else if(!isprint(static_cast<char>(value)))
+            std::cout << "char: Non displayable" << std::endl;
+        else
+            std::cout << "char : '" << static_cast<char>(value) <<"'" << std::endl;
+    }
+}
+
 
 void parsing(std::string input)
 {
-    long const i(strtol(input, NULL, 10));
     switch (getType(input))
     {
         case FLOAT :
@@ -70,7 +87,7 @@ void parsing(std::string input)
             std::cout << "char" << std::endl;
             break;
         case INT :
-            std::cout << "int" << std::endl;
+            isInt(input);
             break;
         case OTHER :
             std::cout << "other" << std::endl;
