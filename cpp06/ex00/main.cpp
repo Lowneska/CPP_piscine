@@ -20,7 +20,7 @@ std::string supress_space(std::string &input)
     return result;
 }
 
-e_type parsing(std::string input)
+e_type getType(std::string input)
 {
     unsigned int i = 0;
     if (!input[i])
@@ -54,20 +54,11 @@ e_type parsing(std::string input)
     return OTHER; 
 }
 
-int main(int ac, char **av)
+
+void parsing(std::string input)
 {
-	if (ac < 2)
-	{
-		std::cout << "Not enough arguments" << std::endl;
-		return (1);
-	}
-	else if (ac > 2)
-	{
-		std::cout << "Too many arguments" << std::endl;
-		return (1);
-	}
-	std::string s(av[1]);
-	switch (parsing(av[1]))
+    long const i(strtol(input, NULL, 10));
+    switch (getType(input))
     {
         case FLOAT :
             std::cout << "float" << std::endl;
@@ -85,5 +76,23 @@ int main(int ac, char **av)
             std::cout << "other" << std::endl;
             break;
     }
+}
+
+
+int main(int ac, char **argv)
+{
+	if (ac < 2)
+	{
+		std::cout << "Not enough arguments" << std::endl;
+		return (1);
+	}
+	else if (ac > 2)
+	{
+		std::cout << "Too many arguments" << std::endl;
+		return (1);
+	}
+    parsing(argv[1]);
+
+
 	return (0);
 }
