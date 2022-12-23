@@ -3,6 +3,10 @@
 #include <cstring>
 #include <string>
 #include <climits>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <cfloat>
 
 enum e_type { INT, FLOAT, DOUBLE, CHAR, OTHER};
 
@@ -56,9 +60,12 @@ e_type getType(std::string input)
     return OTHER; 
 }
 
+// The std::fixed manipulator is then used to set the output format to fixed-point notation,
+// and the std::setprecision manipulator is used to set the precision to one decimal place.
 void isInt(std::string input)
 {
-    long value = stol(input, NULL, 10);
+    std::string str = supress_space(input);
+    long value = strtol(str.c_str(), NULL, 10);
     if (value < INT_MIN || value > INT_MAX)
         std::cout << "Overflow : conversion de type en char, int, float, double impossible." << std::endl;
     else
@@ -69,28 +76,90 @@ void isInt(std::string input)
             std::cout << "char: Non displayable" << std::endl;
         else
             std::cout << "char : '" << static_cast<char>(value) <<"'" << std::endl;
+        std::cout << "int: " << value << std::endl
+        << std::setprecision(1) << std::fixed << 
+        "float: " << static_cast<float>(value) << "f" << std::endl <<
+        "double: " << static_cast<double>(value) << std::endl;
     }
 }
 
+//LES CHARCTERS non affichables ne sont pas passé au programme
+void isChar(std::string input)
+{
+    std::string str = supress_space(input);
+    char value = str[0];
+    if(!isprint(static_cast<char>(value)))
+        std::cout << "char: Non displayable" << std::endl;
+    else
+    std::cout << "char : '" << value <<"'" << std::endl;
+    std::cout << "int: " << static_cast<int>(value) << std::endl
+    << std::setprecision(1) << std::fixed << 
+    "float: " << static_cast<float>(value) << "f" << std::endl <<
+    "double: " << static_cast<double>(value) << std::endl;
+}
+
+void isFloat(std::string input)
+{
+    std::string str = supress_space(input);
+    float value = strtof(str.c_str(), NULL);
+    if (round(value) < CHAR_MIN || round(value) > CHAR_MAX || isnanf(value))
+        std::cout << "char: impossible" << std::endl;
+    else if(!isprint(static_cast<char>(value)))
+        std::cout << "char: Non displayable" << std::endl;
+    else
+        std::cout << "char : '" << static_cast<char>(value) <<"'" << std::endl;
+
+    if (round(value) < INT_MIN || round(value) > INT_MAX || isnanf(value))
+		std::cout << "int : impossible" << std::endl;
+	else
+		std::cout << "int :" << static_cast<int>(round(value)) << std::endl;
+    std::cout << std::setprecision(1) << std::fixed << 
+    "float: " << value << "f" << std::endl <<
+    "double: " << static_cast<double>(value) << std::endl;
+}
+
+void isDouble(std::string input)
+{
+    std::string str = supress_space(input);
+    double value = strtod(str.c_str(), NULL);
+    if (round(value) < CHAR_MIN || round(value) > CHAR_MAX || isnanf(value))
+        std::cout << "char: impossible" << std::endl;
+    else if(!isprint(static_cast<char>(value)))
+        std::cout << "char: Non displayable" << std::endl;
+    else
+        std::cout << "char : '" << static_cast<char>(value) <<"'" << std::endl;
+
+    if (round(value) < INT_MIN || round(value) > INT_MAX || std::isnan(value))
+		std::cout << "int : impossible" << std::endl;
+	else
+		std::cout << "int :" << static_cast<int>(round(value)) << std::endl;
+
+    std::cout << std::setprecision(1) << std::fixed;
+    if (!std::isinf(value) && (value < FLT_MIN || value > FLT_MAX))
+		std::cout << "float : impossible" << std::endl;
+	else
+		std::cout << "float :" << static_cast<float>(value) << "f" << std::endl;
+    std::cout << "double: " << value << std::endl;
+}
 
 void parsing(std::string input)
 {
     switch (getType(input))
     {
         case FLOAT :
-            std::cout << "float" << std::endl;
+            isFloat(input);
             break;
         case DOUBLE :
-            std::cout << "double" << std::endl;
+            isDouble(input);
             break;
         case CHAR :
-            std::cout << "char" << std::endl;
+            isChar(input);
             break;
         case INT :
             isInt(input);
             break;
         case OTHER :
-            std::cout << "other" << std::endl;
+            std::cout << input <<": is neither an int, nor a displayable char, float or double." << std::endl;
             break;
     }
 }
@@ -109,7 +178,5 @@ int main(int ac, char **argv)
 		return (1);
 	}
     parsing(argv[1]);
-
-
 	return (0);
 }
