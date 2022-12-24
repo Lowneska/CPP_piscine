@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 10:54:20 by skhali            #+#    #+#             */
-/*   Updated: 2022/12/24 10:54:21 by skhali           ###   ########.fr       */
+/*   Created: 2022/12/24 10:54:02 by skhali            #+#    #+#             */
+/*   Updated: 2022/12/24 10:54:03 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-# define DATA_HPP
+#include "identify.hpp"
 
-# include <iostream>
-# include <stdint.h>
-
-typedef struct s_data
+int main()
 {
-	std::string data;
-} Data;
+	Base *p = generate();
+	//identify(NULL);
+	//identify(p);
+	identify(*p);
 
-// opérateur de conversion qui permet de converti
-//un pointeur d'un type à un autre
-uintptr_t	serialize(Data* ptr)
-{
-	return reinterpret_cast<uintptr_t>(ptr);
+	delete p;
 }
-
-Data		*deserialize(uintptr_t raw)
-{
-	return reinterpret_cast<Data *>(raw);
-}
-#endif
