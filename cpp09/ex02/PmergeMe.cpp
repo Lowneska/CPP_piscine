@@ -103,6 +103,8 @@ void PmergeMe::insert(std::vector<int> draft, int struggler, std::vector<std::pa
 			int index = rechercheBinaire(main, *it3);
 			main.insert(main.begin() + index, it2->second);
 		}
+		else
+			main.push_back(it2->second);
 		printVector(main);
     }
 	if (struggler >= 0)
@@ -198,6 +200,8 @@ void PmergeMe::insert_deque(std::deque<int> draft_deque, int struggler, std::deq
 			int index = rechercheBinairedq(main_deque, *it3);
 			main_deque.insert(main_deque.begin() + index, it2->second);
 		}
+		else
+			main_deque.push_back(it2->second);
     }
 	if (struggler >= 0)
 	{
@@ -211,6 +215,9 @@ void PmergeMe::insert_deque(std::deque<int> draft_deque, int struggler, std::deq
 			int index = rechercheBinairedq(main_deque, *it3);
 			main_deque.insert(main_deque.begin() + index, struggler);
 		}
+		else
+			main_deque.push_back(struggler);
+
 	}
 
 }
