@@ -1,0 +1,35 @@
+HEADERS			=	RPN.hpp
+
+SRCS			=	main.cpp		\
+					RPN.cpp    \
+
+OBJS			=	${SRCS:.cpp=.o}
+
+DEPS			=	${SRCS:.cpp=.d}
+
+NAME			=	RPN
+
+CC				=	c++
+RM				=	rm -rf
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98  
+
+### Commandes
+
+all:			${NAME}
+
+${NAME}:		${OBJS}
+				${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+
+.cpp.o:
+				${CC} -c ${CFLAGS} $^ -o $@
+
+clean:
+				${RM} ${OBJS} 
+
+fclean:			clean
+				${RM} ${NAME}
+
+re:				fclean all
+
+-include : ${DEPS}
+
